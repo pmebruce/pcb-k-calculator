@@ -44,13 +44,13 @@ test('installable manifest and iOS metadata use the PCB wordmark',async()=>{
   assert.match(html,/<meta property="og:image" content="https:\/\/[^\"]+\/og\.png"/);
   assert.match(html,/<meta name="twitter:image" content="https:\/\/[^\"]+\/og\.png"/);
   for(const icon of manifest.icons){
-    assert.match(icon.src,/^data:image\/png;base64,/);
-    const data=Buffer.from(icon.src.split(',')[1],'base64');
+    assert.match(icon.src,/^icons\/pcb-(?:192|512|maskable)-v3\.png$/);
+    const data=await readFile(path.join(root,icon.src));
     assert.equal(data.subarray(1,4).toString(),'PNG');
     const size=icon.sizes.split('x').map(Number);
     assert.equal(data.readUInt32BE(16),size[0]);assert.equal(data.readUInt32BE(20),size[1]);
   }
-  const apple=await readFile(path.join(root,'icons/pcb-apple-v2.png'));assert.equal(apple.readUInt32BE(16),180);
+  const apple=await readFile(path.join(root,'icons/pcb-apple-v3.png'));assert.equal(apple.readUInt32BE(16),180);
   assert.deepEqual(Buffer.from(embeddedApple[1],'base64'),apple);
   assert.deepEqual(await readFile(path.join(root,'apple-touch-icon.png')),apple);
   const installation=await readFile(await assetFile(pcbAsset),'utf8');

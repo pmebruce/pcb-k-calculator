@@ -45,11 +45,10 @@ const paths = [
   ...copperTables,
   withBase("/apple-touch-icon.png"),
   withBase("/apple-touch-icon-precomposed.png"),
-  withBase("/icons/pcb-icon.svg"),
-  withBase("/icons/pcb-apple-v2.png"),
-  withBase("/icons/pcb-192-v2.png"),
-  withBase("/icons/pcb-512-v2.png"),
-  withBase("/icons/pcb-maskable-v2.png"),
+  withBase("/icons/pcb-apple-v3.png"),
+  withBase("/icons/pcb-192-v3.png"),
+  withBase("/icons/pcb-512-v3.png"),
+  withBase("/icons/pcb-maskable-v3.png"),
   ...publicFiles.map((file) => withBase("/" + path.relative(root, file).split(path.sep).join("/"))),
 ].sort();
 
