@@ -36,7 +36,7 @@
 
 PNG 圖示直接內嵌於 manifest 與 apple-touch-icon，並保留根目錄 `apple-touch-icon.png` 與 precomposed PNG，確保安裝到主畫面時顯示同一張滿版圖示。
 
-`/pcb-k-calculator/pcb-k/` 與 GitHub Pages 首頁提供相同計算器，是重新安裝的入口。兩個入口皆完整離線快取，並保留原本 localStorage 設定鍵。只有新版入口也已快取時，頁尾才會顯示「已備妥離線使用」。
+`/pcb-k-calculator/install-v3/` 是避開舊 Service Worker 圖示快取的專用安裝入口；它與首頁及 `/pcb-k-calculator/pcb-k/` 提供相同計算器。三個入口皆完整離線快取，並保留原本 localStorage 設定鍵。只有所有入口都已快取時，頁尾才會顯示「已備妥離線使用」。
 
 離線模式只快取本 App 的殼層、腳本、樣式與圖示，不攔截登入路徑或外部網域。所有離線資源完整下載後才啟用；新版本下載完成後，由使用者選擇更新並保留輸入。
 

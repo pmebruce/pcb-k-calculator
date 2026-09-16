@@ -9,6 +9,8 @@ const routeRoot = basePath || "/";
 const assetRoot = basePath ? `${basePath}/` : "/";
 const routePcb = `${basePath}/pcb-k`;
 const assetPcb = `${basePath}/pcb-k/`;
+const routeInstall = `${basePath}/install-v3`;
+const assetInstall = `${basePath}/install-v3/`;
 const withBase = (pathname) => `${basePath}${pathname}`;
 
 await stat(path.join(root, "index.html"));
@@ -21,23 +23,26 @@ async function walk(directory) {
 const files = await walk(root);
 const installPage = ["pcb-k/index.html", "pcb-k.html"].find((name) => files.includes(path.join(root, name)));
 if (!installPage) throw new Error("Missing /pcb-k/ installation page");
+const installV3Page = ["install-v3/index.html", "install-v3.html"].find((name) => files.includes(path.join(root, name)));
+if (!installV3Page) throw new Error("Missing /install-v3/ installation page");
 
 for (const manifestName of ["manifest.webmanifest", "pcb-k.webmanifest"]) {
   const manifestPath = path.join(root, manifestName);
   const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
   manifest.id = assetRoot;
   manifest.scope = assetRoot;
-  manifest.start_url = `${assetPcb}?source=homescreen`;
+  manifest.start_url = `${assetInstall}?source=homescreen`;
   await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
 }
 
-const routeFiles = new Map([[assetRoot, "index.html"], [assetPcb, installPage]]);
-const routeCacheKeys = [[routeRoot, assetRoot], [routePcb, assetPcb]];
+const routeFiles = new Map([[assetRoot, "index.html"], [assetPcb, installPage], [assetInstall, installV3Page]]);
+const routeCacheKeys = [[routeRoot, assetRoot], [routePcb, assetPcb], [routeInstall, assetInstall]];
 const publicFiles = files.filter((file) => /\.(js|css|woff2?|ttf)$/.test(file) && !file.endsWith("/sw.js") && !file.includes("/."));
 const copperTables = [3, 4, 5].flatMap((number) => ["svg", "png"].map((extension) => withBase(`/examples/pcb-table-${number}-v1.${extension}`)));
 const paths = [
   assetRoot,
   assetPcb,
+  assetInstall,
   withBase("/manifest.webmanifest"),
   withBase("/pcb-k.webmanifest"),
   withBase("/examples/pcb-stackup-v1.svg"),

@@ -4,7 +4,7 @@
   "short_name": "pcb-k計算",
   "description": "逐層計算 PCB 的板面及厚度方向導熱係數。",
   "lang": "zh-Hant",
-  "start_url": "/pcb-k?source=homescreen",
+  "start_url": "/install-v3/?source=homescreen",
   "scope": "/",
   "display": "standalone",
   "orientation": "any",

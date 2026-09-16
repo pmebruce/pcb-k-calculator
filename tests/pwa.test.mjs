@@ -15,6 +15,8 @@ const rootRoute=basePath||'/';
 const rootAsset=basePath?`${basePath}/`:'/';
 const pcbRoute=`${basePath}/pcb-k`;
 const pcbAsset=`${basePath}/pcb-k/`;
+const installRoute=`${basePath}/install-v3`;
+const installAsset=`${basePath}/install-v3/`;
 const withBase=(pathname)=>`${basePath}${pathname}`;
 async function assetFile(asset) {
   if(asset===rootAsset||asset===rootRoute) return path.join(root,'index.html');
@@ -23,6 +25,7 @@ async function assetFile(asset) {
     try { await access(directoryPage);return directoryPage; }
     catch { return path.join(root,'pcb-k.html'); }
   }
+  if(asset===installAsset||asset===installRoute) return path.join(root,'install-v3/index.html');
   const relative=basePath&&asset.startsWith(basePath)?asset.slice(basePath.length):asset;
   return path.join(root,relative.replace(/^\//,''));
 }
@@ -30,7 +33,7 @@ async function assetFile(asset) {
 test('installable manifest and iOS metadata use the PCB wordmark',async()=>{
   const manifest=builtManifest;
   assert.equal(manifest.name,'pcb-k計算');assert.equal(manifest.short_name,'pcb-k計算');assert.equal(manifest.display,'standalone');assert.equal(manifest.scope,rootAsset);
-  assert.equal(manifest.id,rootAsset);assert.equal(new URL(manifest.start_url,origin).pathname,pcbAsset);
+  assert.equal(manifest.id,rootAsset);assert.equal(new URL(manifest.start_url,origin).pathname,installAsset);
   assert.match(html,/<meta name="apple-mobile-web-app-title" content="pcb-k計算"/);
   assert.match(html,/<meta name="apple-mobile-web-app-capable" content="yes"/);
   const manifestLinks=html.match(/<link\b[^>]*rel="manifest"[^>]*>/g);
@@ -80,7 +83,7 @@ function harness({badRoot=false,badRoute=rootAsset}={}) {
     const pathname=new URL(typeof request==='string'?request:request.url,origin).pathname;
     if(badRoot && pathname===badRoute)return new Response('<html>Please sign in</html>',{headers:{'content-type':'text/html'}});
     const body=await readFile(await assetFile(pathname));
-    const type=[rootAsset,pcbAsset].includes(pathname)?'text/html':pathname.endsWith('.js')?'application/javascript':pathname.endsWith('.css')?'text/css':pathname.endsWith('.png')?'image/png':pathname.endsWith('.jpeg')?'image/jpeg':pathname.endsWith('.svg')?'image/svg+xml':'application/json';
+    const type=[rootAsset,pcbAsset,installAsset].includes(pathname)?'text/html':pathname.endsWith('.js')?'application/javascript':pathname.endsWith('.css')?'text/css':pathname.endsWith('.png')?'image/png':pathname.endsWith('.jpeg')?'image/jpeg':pathname.endsWith('.svg')?'image/svg+xml':'application/json';
     return new Response(body,{headers:{'content-type':type}});
   };
   const scope={location:{origin},clients:{claim:async()=>{}},skipWaiting:()=>{skipped++;},addEventListener:(name,handler)=>handlers.set(name,handler)};
@@ -100,10 +103,10 @@ test('after installation the entire app shell and its scripts remain available o
   assert.equal((await app.ready()).ready,true);
   app.setOffline();const response=await app.request(`${rootAsset}?source=homescreen`);
   assert.equal(response.status,200);assert.match(await response.text(),/pcb-k計算/);
-  for(const route of [`${pcbRoute}?source=homescreen`,pcbAsset]) {
+  for(const route of [`${pcbRoute}?source=homescreen`,pcbAsset,`${installRoute}?source=homescreen`,installAsset]) {
     const page=await app.request(route);assert.equal(page.status,200);assert.match(await page.text(),/pcb-k計算/);
   }
-  for(const asset of assets.filter(a=>![rootAsset,pcbAsset].includes(a))) assert.equal((await app.request(asset,'cors')).status,200);
+  for(const asset of assets.filter(a=>![rootAsset,pcbAsset,installAsset].includes(a))) assert.equal((await app.request(asset,'cors')).status,200);
   const referenceFigures=['pcb-stackup-v1',... [3,4,5].map(number=>`pcb-table-${number}-v1`)];
   for(const [asset,type] of referenceFigures.flatMap(name=>[[withBase(`/examples/${name}.svg`),'image/svg+xml'],[withBase(`/examples/${name}.png`),'image/png']])) {
     const figure=await app.request(asset,'cors');
@@ -111,7 +114,7 @@ test('after installation the entire app shell and its scripts remain available o
     assert.equal(figure.headers.get('content-type'),type);
     assert.deepEqual(Buffer.from(await figure.arrayBuffer()),await readFile(await assetFile(asset)));
   }
-  assert.deepEqual(Array.from((await app.ready()).routes),[rootRoute,pcbRoute]);
+  assert.deepEqual(Array.from((await app.ready()).routes),[rootRoute,pcbRoute,installRoute]);
   assert.equal(await app.request(withBase('/auth/callback')),null);
   assert.equal(await app.request(`${rootAsset}?_rsc=1`,'cors'),null);
   assert.equal(await app.request(`${pcbRoute}?_rsc=1`,'cors'),null);
@@ -120,7 +123,7 @@ test('after installation the entire app shell and its scripts remain available o
 });
 
 test('a sign-in page cannot be mistaken for a cached app shell',async()=>{
-  for(const badRoute of [rootAsset,pcbAsset]) {
+  for(const badRoute of [rootAsset,pcbAsset,installAsset]) {
     const app=harness({badRoot:true,badRoute});await assert.rejects(app.install(),/Invalid app shell/);
     assert.equal((await app.ready()).ready,false);
   }
