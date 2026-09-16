@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1162" viewBox="0 0 900 1162" role="img" aria-labelledby="title desc">
+<title id="title">Table 4 — 內層銅箔厚度</title>
+<desc id="desc">Internal layer copper foil, after processing. Minimum thickness. 0.5 oz: 11.4 µm (0.449 mil). 1.0 oz: 24.9 µm (0.980 mil). 2.0 oz: 55.7 µm (2.193 mil). 3.0 oz: 86.6 µm (3.409 mil). 4.0 oz: 117.5 µm (4.626 mil). 5.0 oz: 148.3 µm (5.839 mil). 6.0 oz: 179.2 µm (7.056 mil). Values preserved as printed in the supplied table.</desc>
+<defs><clipPath id="table"><rect x="56" y="270" width="788" height="726" rx="14"/></clipPath></defs>
+<style>
+text { font-family: 'DejaVu Sans', Arial, sans-serif; }
+.header { fill:#fffef4; font-size:23px; font-weight:600; }
+.header-muted { fill:#c6d9b6; font-size:22px; }
+.plating { fill:#fffef4; font-size:31px; font-weight:600; }
+.weight { fill:#415d3c; font-size:35px; font-weight:600; }
+.value { fill:#243f2e; font-size:35px; font-weight:700; font-variant-numeric:tabular-nums; }
+.unit { fill:#687c5e; font-size:23px; font-weight:400; }
+.mil { fill:#72806a; font-size:24px; }
+</style>
+<rect width="900" height="1162" fill="#f3f3eb"/>
+<rect x="24" y="24" width="852" height="1114" rx="28" fill="#fffefa" stroke="#dce2d4" stroke-width="2"/>
+<text x="56" y="81" fill="#a5663a" font-size="25" font-weight="700" letter-spacing="4">PCB PROCUREMENT</text>
+<rect x="672" y="51" width="172" height="46" rx="23" fill="#eaf0e1"/>
+<text x="758" y="81" fill="#436740" font-size="23" font-weight="700" text-anchor="middle">TABLE 4</text>
+<text x="56" y="157" fill="#164c3a" font-size="60" font-weight="700" letter-spacing="-1.5">INNER COPPER</text>
+<text x="58" y="200" fill="#687961" font-size="26">Finished conductor thickness · minimum</text>
+<text x="58" y="238" fill="#87907f" font-size="23">§ 5.2.2 · Internal layer copper foil, after processing</text>
+<g clip-path="url(#table)">
+<rect x="56" y="270" width="788" height="110" fill="#164c3a"/>
+<g data-weight-oz="0.5">
+      <rect x="56" y="380" width="788" height="88" fill="#fffefa"/>
+      <path d="M56 468H844" stroke="#dce3d3" stroke-width="1.5"/>
+      <text x="152" y="434" class="weight" text-anchor="middle">0.5</text>
+      <g data-um="11.4" data-mil="0.449">
+        <text x="546" y="419" class="value" text-anchor="middle">11.4<tspan dx="7" class="unit">µm</tspan></text>
+        <text x="546" y="450" class="mil" text-anchor="middle">0.449 mil</text>
+      </g>
+    </g>
+<g data-weight-oz="1.0">
+      <rect x="56" y="468" width="788" height="88" fill="#f0f3e9"/>
+      <path d="M56 556H844" stroke="#dce3d3" stroke-width="1.5"/>
+      <text x="152" y="522" class="weight" text-anchor="middle">1.0</text>
+      <g data-um="24.9" data-mil="0.980">
+        <text x="546" y="507" class="value" text-anchor="middle">24.9<tspan dx="7" class="unit">µm</tspan></text>
+        <text x="546" y="538" class="mil" text-anchor="middle">0.980 mil</text>
+      </g>
+    </g>
+<g data-weight-oz="2.0">
+      <rect x="56" y="556" width="788" height="88" fill="#fffefa"/>
+      <path d="M56 644H844" stroke="#dce3d3" stroke-width="1.5"/>
+      <text x="152" y="610" class="weight" text-anchor="middle">2.0</text>
+      <g data-um="55.7" data-mil="2.193">
+        <text x="546" y="595" class="value" text-anchor="middle">55.7<tspan dx="7" class="unit">µm</tspan></text>
+        <text x="546" y="626" class="mil" text-anchor="middle">2.193 mil</text>
+      </g>
+    </g>
+<g data-weight-oz="3.0">
+      <rect x="56" y="644" width="788" height="88" fill="#f0f3e9"/>
+      <path d="M56 732H844" stroke="#dce3d3" stroke-width="1.5"/>
+      <text x="152" y="698" class="weight" text-anchor="middle">3.0</text>
+      <g data-um="86.6" data-mil="3.409">
+        <text x="546" y="683" class="value" text-anchor="middle">86.6<tspan dx="7" class="unit">µm</tspan></text>
+        <text x="546" y="714" class="mil" text-anchor="middle">3.409 mil</text>
+      </g>
+    </g>
+<g data-weight-oz="4.0">
+      <rect x="56" y="732" width="788" height="88" fill="#fffefa"/>
+      <path d="M56 820H844" stroke="#dce3d3" stroke-width="1.5"/>
+      <text x="152" y="786" class="weight" text-anchor="middle">4.0</text>
+      <g data-um="117.5" data-mil="4.626">
+        <text x="546" y="771" class="value" text-anchor="middle">117.5<tspan dx="7" class="unit">µm</tspan></text>
+        <text x="546" y="802" class="mil" text-anchor="middle">4.626 mil</text>
+      </g>
+    </g>
+<g data-weight-oz="5.0">
+      <rect x="56" y="820" width="788" height="88" fill="#f0f3e9"/>
+      <path d="M56 908H844" stroke="#dce3d3" stroke-width="1.5"/>
+      <text x="152" y="874" class="weight" text-anchor="middle">5.0</text>
+      <g data-um="148.3" data-mil="5.839">
+        <text x="546" y="859" class="value" text-anchor="middle">148.3<tspan dx="7" class="unit">µm</tspan></text>
+        <text x="546" y="890" class="mil" text-anchor="middle">5.839 mil</text>
+      </g>
+    </g>
+<g data-weight-oz="6.0">
+      <rect x="56" y="908" width="788" height="88" fill="#fffefa"/>
+      <path d="M56 996H844" stroke="#dce3d3" stroke-width="1.5"/>
+      <text x="152" y="962" class="weight" text-anchor="middle">6.0</text>
+      <g data-um="179.2" data-mil="7.056">
+        <text x="546" y="947" class="value" text-anchor="middle">179.2<tspan dx="7" class="unit">µm</tspan></text>
+        <text x="546" y="978" class="mil" text-anchor="middle">7.056 mil</text>
+      </g>
+    </g>
+<text x="152" y="314" class="header" text-anchor="middle">BASE COPPER</text>
+<text x="152" y="347" class="header-muted" text-anchor="middle">WEIGHT · oz</text>
+<text x="546" y="314" class="header" text-anchor="middle">FINISHED CONDUCTOR THICKNESS</text><text x="546" y="351" class="header-muted" text-anchor="middle">MINIMUM</text>
+<path d="M248 270V996" stroke="#c6d3be" stroke-opacity=".7" stroke-width="1.5"/>
+</g>
+<rect x="56" y="270" width="788" height="726" rx="14" fill="none" stroke="#d4decc" stroke-width="2"/>
+<text x="58" y="1053" fill="#49633f" font-size="27" font-weight="600">1 mil = 0.001 in</text>
+<text x="58" y="1097" fill="#7d8974" font-size="23">µm and mil values preserved as printed.</text>
+</svg>

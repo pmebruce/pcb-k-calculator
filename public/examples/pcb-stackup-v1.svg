@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1260" viewBox="0 0 900 1260" role="img" aria-labelledby="title desc">
+<title id="title">Four-layer PCB specification</title>
+<desc id="desc">L1 copper foil minimum 3.8 mil; prepreg minimum 10 mil; L2 copper foil minimum 3.409 mil; core minimum 15 mil; L3 copper foil minimum 3.409 mil; prepreg minimum 10 mil; L4 copper foil minimum 3.8 mil. PWB total thickness 1.57 ± 0.15 mm, or 61.8 ± 5.9 mil. Layer values are minima. Schematic not to scale.</desc>
+<defs>
+  <linearGradient id="copper" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#e6b48b"/><stop offset="1" stop-color="#cc936c"/></linearGradient>
+  <pattern id="prepreg" width="14" height="14" patternUnits="userSpaceOnUse"><rect width="14" height="14" fill="#e7eddb"/><path d="M-4 4L4-4M0 14L14 0M10 18L18 10" stroke="#c0ceb3" stroke-width="1.5"/></pattern>
+  <pattern id="core" width="18" height="18" patternUnits="userSpaceOnUse"><rect width="18" height="18" fill="#b9cdb7"/><path d="M0 9H18M9 0V18" stroke="#96b192" stroke-width="1.2"/></pattern>
+</defs>
+<style>
+ text { font-family: 'DejaVu Sans', Arial, sans-serif; }
+ .layer { font-size: 38px; font-weight: 700; fill: #264c39; }
+ .position { font-size: 23px; fill: #71816e; }
+ .material { font-size: 36px; font-weight: 600; }
+ .thickness { font-size: 42px; font-weight: 600; fill: #2c4232; font-variant-numeric: tabular-nums; }
+ .unit { font-size: 27px; font-weight: 400; fill: #71816e; }
+</style>
+<rect width="900" height="1260" fill="#f3f3eb"/>
+<rect x="24" y="24" width="852" height="1212" rx="28" fill="#fffefa" stroke="#dce2d4" stroke-width="2"/>
+<text x="56" y="83" fill="#a5663a" font-size="26" font-weight="700" letter-spacing="5">PWB STACK-UP</text>
+<rect x="600" y="51" width="244" height="46" rx="23" fill="#eaf0e1"/>
+<text x="722" y="81" fill="#436740" font-size="21" font-weight="600" text-anchor="middle">4 COPPER LAYERS</text>
+<text x="56" y="163" fill="#164c3a" font-size="59" font-weight="700" letter-spacing="-2">PCB SPECIFICATION</text>
+<text x="58" y="207" fill="#78846f" font-size="26">Copper foil / Prepreg / Core</text>
+<path d="M56 235H844" stroke="#dfe4d6" stroke-width="2"/>
+<text x="64" y="275" fill="#78846f" font-size="25">LAYER</text>
+<text x="404" y="275" fill="#78846f" font-size="25" text-anchor="middle">CONSTRUCTION</text>
+<text x="846" y="275" fill="#78846f" font-size="25" text-anchor="end">MIN. THICKNESS</text>
+<g data-material="Copper foil" data-minimum-mil="3.8">
+    <text x="111" y="335" class="layer" text-anchor="middle">L1</text><text x="111" y="362" class="position" text-anchor="middle">Outside</text><path d="M179 338 H205" stroke="#9da99b" stroke-width="2"/>
+    <rect x="218" y="300" width="372" height="76" fill="url(#copper)" stroke="#fafbf5" stroke-width="2"/>
+    
+    <text x="404" y="350" class="material" text-anchor="middle" fill="#4b301e">Copper foil</text>
+    <text x="846" y="350" class="thickness" text-anchor="end">3.8<tspan class="unit" dx="8">mil</tspan></text>
+    <path d="M610 376 H846" stroke="#e5e8dd" stroke-width="1.5"/>
+  </g>
+<g data-material="Prepreg" data-minimum-mil="10">
+    
+    <rect x="218" y="376" width="372" height="100" fill="url(#prepreg)" stroke="#fafbf5" stroke-width="2"/>
+    <rect x="278" y="398" width="252" height="56" rx="10" fill="#fffefa" stroke="#ccd8bf" stroke-width="1.5"/>
+    <text x="404" y="438" class="material" text-anchor="middle" fill="#264c39">Prepreg</text>
+    <text x="846" y="438" class="thickness" text-anchor="end">10<tspan class="unit" dx="8">mil</tspan></text>
+    <path d="M610 476 H846" stroke="#e5e8dd" stroke-width="1.5"/>
+  </g>
+<g data-material="Copper foil" data-minimum-mil="3.409">
+    <text x="111" y="511" class="layer" text-anchor="middle">L2</text><text x="111" y="538" class="position" text-anchor="middle">Inner</text><path d="M179 514 H205" stroke="#9da99b" stroke-width="2"/>
+    <rect x="218" y="476" width="372" height="76" fill="url(#copper)" stroke="#fafbf5" stroke-width="2"/>
+    
+    <text x="404" y="526" class="material" text-anchor="middle" fill="#4b301e">Copper foil</text>
+    <text x="846" y="526" class="thickness" text-anchor="end">3.409<tspan class="unit" dx="8">mil</tspan></text>
+    <path d="M610 552 H846" stroke="#e5e8dd" stroke-width="1.5"/>
+  </g>
+<g data-material="Core" data-minimum-mil="15">
+    
+    <rect x="218" y="552" width="372" height="120" fill="url(#core)" stroke="#fafbf5" stroke-width="2"/>
+    <rect x="278" y="584" width="252" height="56" rx="10" fill="#fffefa" stroke="#a8bda7" stroke-width="1.5"/>
+    <text x="404" y="624" class="material" text-anchor="middle" fill="#264c39">Core</text>
+    <text x="846" y="624" class="thickness" text-anchor="end">15<tspan class="unit" dx="8">mil</tspan></text>
+    <path d="M610 672 H846" stroke="#e5e8dd" stroke-width="1.5"/>
+  </g>
+<g data-material="Copper foil" data-minimum-mil="3.409">
+    <text x="111" y="707" class="layer" text-anchor="middle">L3</text><text x="111" y="734" class="position" text-anchor="middle">Inner</text><path d="M179 710 H205" stroke="#9da99b" stroke-width="2"/>
+    <rect x="218" y="672" width="372" height="76" fill="url(#copper)" stroke="#fafbf5" stroke-width="2"/>
+    
+    <text x="404" y="722" class="material" text-anchor="middle" fill="#4b301e">Copper foil</text>
+    <text x="846" y="722" class="thickness" text-anchor="end">3.409<tspan class="unit" dx="8">mil</tspan></text>
+    <path d="M610 748 H846" stroke="#e5e8dd" stroke-width="1.5"/>
+  </g>
+<g data-material="Prepreg" data-minimum-mil="10">
+    
+    <rect x="218" y="748" width="372" height="100" fill="url(#prepreg)" stroke="#fafbf5" stroke-width="2"/>
+    <rect x="278" y="770" width="252" height="56" rx="10" fill="#fffefa" stroke="#ccd8bf" stroke-width="1.5"/>
+    <text x="404" y="810" class="material" text-anchor="middle" fill="#264c39">Prepreg</text>
+    <text x="846" y="810" class="thickness" text-anchor="end">10<tspan class="unit" dx="8">mil</tspan></text>
+    <path d="M610 848 H846" stroke="#e5e8dd" stroke-width="1.5"/>
+  </g>
+<g data-material="Copper foil" data-minimum-mil="3.8">
+    <text x="111" y="883" class="layer" text-anchor="middle">L4</text><text x="111" y="910" class="position" text-anchor="middle">Outside</text><path d="M179 886 H205" stroke="#9da99b" stroke-width="2"/>
+    <rect x="218" y="848" width="372" height="76" fill="url(#copper)" stroke="#fafbf5" stroke-width="2"/>
+    
+    <text x="404" y="898" class="material" text-anchor="middle" fill="#4b301e">Copper foil</text>
+    <text x="846" y="898" class="thickness" text-anchor="end">3.8<tspan class="unit" dx="8">mil</tspan></text>
+    <path d="M610 924 H846" stroke="#e5e8dd" stroke-width="1.5"/>
+  </g>
+<rect x="218" y="300" width="372" height="624" rx="0" fill="none" stroke="#bdc9b2" stroke-width="2"/>
+<rect x="56" y="980" width="788" height="178" rx="18" fill="#164c3a"/>
+<text x="82" y="1020" fill="#bed1ac" font-size="24" letter-spacing="2">PWB TOTAL THICKNESS</text>
+<text x="82" y="1083" fill="#fffef3" font-size="56" font-weight="700">1.57 ± 0.15<tspan font-size="34" font-weight="400" dx="10">mm</tspan></text>
+<text x="82" y="1129" fill="#d8e2cb" font-size="30">61.8 ± 5.9 mil</text>
+<text x="56" y="1200" fill="#78846f" font-size="24">Minimum layer values · Schematic not to scale</text>
+</svg>
