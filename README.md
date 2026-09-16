@@ -32,11 +32,11 @@
 - `node --experimental-strip-types scripts/create-pcb-spec.mjs`：由 `lib/pcb-spec.ts` 的原圖數值重繪 SVG／PNG 規格圖，需 sharp。圖面與計算範例共用這份數值。
 - `node --experimental-strip-types scripts/create-copper-tables.mjs`：由 `lib/pcb-copper-tables.ts` 產生 Table 3–5 的 SVG／PNG；畫面與圖片共用這份原表數值。
 
-靜態輸出為 `dist/client`。App 名稱與主畫面名稱均為 `pcb-k計算`；圖示為滿版深藍背景的 PCB 導熱計算圖，沒有內縮邊框或凸起段差。
+靜態輸出為 `dist/client`。App 名稱與主畫面名稱均為 `pcb-k計算`；圖示為滿版深藍背景的簡化 PCB、熱流箭頭與醒目 `PCB λ` 字樣，沒有內縮邊框或凸起段差。
 
 PNG 圖示直接內嵌於 manifest 與 apple-touch-icon，並保留根目錄 `apple-touch-icon.png` 與 precomposed PNG，確保安裝到主畫面時顯示同一張滿版圖示。
 
-`/pcb-k-calculator/install-v3/` 是避開舊 Service Worker 圖示快取的專用安裝入口；它與首頁及 `/pcb-k-calculator/pcb-k/` 提供相同計算器。三個入口皆完整離線快取，並保留原本 localStorage 設定鍵。只有所有入口都已快取時，頁尾才會顯示「已備妥離線使用」。
+`/pcb-k-calculator/install-v4/` 是避開舊 Service Worker 圖示快取的最新安裝入口；它與首頁、`/pcb-k-calculator/pcb-k/` 及舊的 `/install-v3/` 提供相同計算器。所有入口皆完整離線快取，並保留原本 localStorage 設定鍵。只有所有入口都已快取時，頁尾才會顯示「已備妥離線使用」。
 
 離線模式只快取本 App 的殼層、腳本、樣式與圖示，不攔截登入路徑或外部網域。所有離線資源完整下載後才啟用；新版本下載完成後，由使用者選擇更新並保留輸入。
 

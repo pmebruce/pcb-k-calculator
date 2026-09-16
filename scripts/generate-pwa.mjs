@@ -9,8 +9,10 @@ const routeRoot = basePath || "/";
 const assetRoot = basePath ? `${basePath}/` : "/";
 const routePcb = `${basePath}/pcb-k`;
 const assetPcb = `${basePath}/pcb-k/`;
-const routeInstall = `${basePath}/install-v3`;
-const assetInstall = `${basePath}/install-v3/`;
+const routeInstallV3 = `${basePath}/install-v3`;
+const assetInstallV3 = `${basePath}/install-v3/`;
+const routeInstall = `${basePath}/install-v4`;
+const assetInstall = `${basePath}/install-v4/`;
 const withBase = (pathname) => `${basePath}${pathname}`;
 
 await stat(path.join(root, "index.html"));
@@ -25,6 +27,8 @@ const installPage = ["pcb-k/index.html", "pcb-k.html"].find((name) => files.incl
 if (!installPage) throw new Error("Missing /pcb-k/ installation page");
 const installV3Page = ["install-v3/index.html", "install-v3.html"].find((name) => files.includes(path.join(root, name)));
 if (!installV3Page) throw new Error("Missing /install-v3/ installation page");
+const installV4Page = ["install-v4/index.html", "install-v4.html"].find((name) => files.includes(path.join(root, name)));
+if (!installV4Page) throw new Error("Missing /install-v4/ installation page");
 
 for (const manifestName of ["manifest.webmanifest", "pcb-k.webmanifest"]) {
   const manifestPath = path.join(root, manifestName);
@@ -35,13 +39,14 @@ for (const manifestName of ["manifest.webmanifest", "pcb-k.webmanifest"]) {
   await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
 }
 
-const routeFiles = new Map([[assetRoot, "index.html"], [assetPcb, installPage], [assetInstall, installV3Page]]);
-const routeCacheKeys = [[routeRoot, assetRoot], [routePcb, assetPcb], [routeInstall, assetInstall]];
+const routeFiles = new Map([[assetRoot, "index.html"], [assetPcb, installPage], [assetInstallV3, installV3Page], [assetInstall, installV4Page]]);
+const routeCacheKeys = [[routeRoot, assetRoot], [routePcb, assetPcb], [routeInstallV3, assetInstallV3], [routeInstall, assetInstall]];
 const publicFiles = files.filter((file) => /\.(js|css|woff2?|ttf)$/.test(file) && !file.endsWith("/sw.js") && !file.includes("/."));
 const copperTables = [3, 4, 5].flatMap((number) => ["svg", "png"].map((extension) => withBase(`/examples/pcb-table-${number}-v1.${extension}`)));
 const paths = [
   assetRoot,
   assetPcb,
+  assetInstallV3,
   assetInstall,
   withBase("/manifest.webmanifest"),
   withBase("/pcb-k.webmanifest"),
@@ -50,10 +55,10 @@ const paths = [
   ...copperTables,
   withBase("/apple-touch-icon.png"),
   withBase("/apple-touch-icon-precomposed.png"),
-  withBase("/icons/pcb-apple-v3.png"),
-  withBase("/icons/pcb-192-v3.png"),
-  withBase("/icons/pcb-512-v3.png"),
-  withBase("/icons/pcb-maskable-v3.png"),
+  withBase("/icons/pcb-apple-v4.png"),
+  withBase("/icons/pcb-192-v4.png"),
+  withBase("/icons/pcb-512-v4.png"),
+  withBase("/icons/pcb-maskable-v4.png"),
   ...publicFiles.map((file) => withBase("/" + path.relative(root, file).split(path.sep).join("/"))),
 ].sort();
 

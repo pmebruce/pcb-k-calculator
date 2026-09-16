@@ -15,8 +15,10 @@ const rootRoute=basePath||'/';
 const rootAsset=basePath?`${basePath}/`:'/';
 const pcbRoute=`${basePath}/pcb-k`;
 const pcbAsset=`${basePath}/pcb-k/`;
-const installRoute=`${basePath}/install-v3`;
-const installAsset=`${basePath}/install-v3/`;
+const installV3Route=`${basePath}/install-v3`;
+const installV3Asset=`${basePath}/install-v3/`;
+const installRoute=`${basePath}/install-v4`;
+const installAsset=`${basePath}/install-v4/`;
 const withBase=(pathname)=>`${basePath}${pathname}`;
 async function assetFile(asset) {
   if(asset===rootAsset||asset===rootRoute) return path.join(root,'index.html');
@@ -25,7 +27,8 @@ async function assetFile(asset) {
     try { await access(directoryPage);return directoryPage; }
     catch { return path.join(root,'pcb-k.html'); }
   }
-  if(asset===installAsset||asset===installRoute) return path.join(root,'install-v3/index.html');
+  if(asset===installV3Asset||asset===installV3Route) return path.join(root,'install-v3/index.html');
+  if(asset===installAsset||asset===installRoute) return path.join(root,'install-v4/index.html');
   const relative=basePath&&asset.startsWith(basePath)?asset.slice(basePath.length):asset;
   return path.join(root,relative.replace(/^\//,''));
 }
@@ -47,13 +50,13 @@ test('installable manifest and iOS metadata use the PCB wordmark',async()=>{
   assert.match(html,/<meta property="og:image" content="https:\/\/[^\"]+\/og\.png"/);
   assert.match(html,/<meta name="twitter:image" content="https:\/\/[^\"]+\/og\.png"/);
   for(const icon of manifest.icons){
-    assert.match(icon.src,/^icons\/pcb-(?:192|512|maskable)-v3\.png$/);
+    assert.match(icon.src,/^icons\/pcb-(?:192|512|maskable)-v4\.png$/);
     const data=await readFile(path.join(root,icon.src));
     assert.equal(data.subarray(1,4).toString(),'PNG');
     const size=icon.sizes.split('x').map(Number);
     assert.equal(data.readUInt32BE(16),size[0]);assert.equal(data.readUInt32BE(20),size[1]);
   }
-  const apple=await readFile(path.join(root,'icons/pcb-apple-v3.png'));assert.equal(apple.readUInt32BE(16),180);
+  const apple=await readFile(path.join(root,'icons/pcb-apple-v4.png'));assert.equal(apple.readUInt32BE(16),180);
   assert.deepEqual(Buffer.from(embeddedApple[1],'base64'),apple);
   assert.deepEqual(await readFile(path.join(root,'apple-touch-icon.png')),apple);
   const installation=await readFile(await assetFile(pcbAsset),'utf8');
@@ -83,7 +86,7 @@ function harness({badRoot=false,badRoute=rootAsset}={}) {
     const pathname=new URL(typeof request==='string'?request:request.url,origin).pathname;
     if(badRoot && pathname===badRoute)return new Response('<html>Please sign in</html>',{headers:{'content-type':'text/html'}});
     const body=await readFile(await assetFile(pathname));
-    const type=[rootAsset,pcbAsset,installAsset].includes(pathname)?'text/html':pathname.endsWith('.js')?'application/javascript':pathname.endsWith('.css')?'text/css':pathname.endsWith('.png')?'image/png':pathname.endsWith('.jpeg')?'image/jpeg':pathname.endsWith('.svg')?'image/svg+xml':'application/json';
+    const type=[rootAsset,pcbAsset,installV3Asset,installAsset].includes(pathname)?'text/html':pathname.endsWith('.js')?'application/javascript':pathname.endsWith('.css')?'text/css':pathname.endsWith('.png')?'image/png':pathname.endsWith('.jpeg')?'image/jpeg':pathname.endsWith('.svg')?'image/svg+xml':'application/json';
     return new Response(body,{headers:{'content-type':type}});
   };
   const scope={location:{origin},clients:{claim:async()=>{}},skipWaiting:()=>{skipped++;},addEventListener:(name,handler)=>handlers.set(name,handler)};
@@ -103,10 +106,10 @@ test('after installation the entire app shell and its scripts remain available o
   assert.equal((await app.ready()).ready,true);
   app.setOffline();const response=await app.request(`${rootAsset}?source=homescreen`);
   assert.equal(response.status,200);assert.match(await response.text(),/pcb-k計算/);
-  for(const route of [`${pcbRoute}?source=homescreen`,pcbAsset,`${installRoute}?source=homescreen`,installAsset]) {
+  for(const route of [`${pcbRoute}?source=homescreen`,pcbAsset,`${installV3Route}?source=homescreen`,installV3Asset,`${installRoute}?source=homescreen`,installAsset]) {
     const page=await app.request(route);assert.equal(page.status,200);assert.match(await page.text(),/pcb-k計算/);
   }
-  for(const asset of assets.filter(a=>![rootAsset,pcbAsset,installAsset].includes(a))) assert.equal((await app.request(asset,'cors')).status,200);
+  for(const asset of assets.filter(a=>![rootAsset,pcbAsset,installV3Asset,installAsset].includes(a))) assert.equal((await app.request(asset,'cors')).status,200);
   const referenceFigures=['pcb-stackup-v1',... [3,4,5].map(number=>`pcb-table-${number}-v1`)];
   for(const [asset,type] of referenceFigures.flatMap(name=>[[withBase(`/examples/${name}.svg`),'image/svg+xml'],[withBase(`/examples/${name}.png`),'image/png']])) {
     const figure=await app.request(asset,'cors');
@@ -114,7 +117,7 @@ test('after installation the entire app shell and its scripts remain available o
     assert.equal(figure.headers.get('content-type'),type);
     assert.deepEqual(Buffer.from(await figure.arrayBuffer()),await readFile(await assetFile(asset)));
   }
-  assert.deepEqual(Array.from((await app.ready()).routes),[rootRoute,pcbRoute,installRoute]);
+  assert.deepEqual(Array.from((await app.ready()).routes),[rootRoute,pcbRoute,installV3Route,installRoute]);
   assert.equal(await app.request(withBase('/auth/callback')),null);
   assert.equal(await app.request(`${rootAsset}?_rsc=1`,'cors'),null);
   assert.equal(await app.request(`${pcbRoute}?_rsc=1`,'cors'),null);
@@ -123,7 +126,7 @@ test('after installation the entire app shell and its scripts remain available o
 });
 
 test('a sign-in page cannot be mistaken for a cached app shell',async()=>{
-  for(const badRoute of [rootAsset,pcbAsset,installAsset]) {
+  for(const badRoute of [rootAsset,pcbAsset,installV3Asset,installAsset]) {
     const app=harness({badRoot:true,badRoute});await assert.rejects(app.install(),/Invalid app shell/);
     assert.equal((await app.ready()).ready,false);
   }
