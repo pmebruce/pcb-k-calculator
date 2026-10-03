@@ -518,3 +518,21 @@ header.tool-hero h1{font-size:25px!important}
 .tool-kicker{color:#9a5525!important}
 .tool-hero-description{color:#55665a!important}
 .tool-install span{display:inline!important}
+
+
+/* Keep the toolbox navigation inside narrow iPhone viewports. */
+.tool-hero-nav{width:100%;min-width:0;box-sizing:border-box}
+.tool-home-link{min-width:0;flex:1 1 auto}
+.tool-install[data-slot="button"]{width:auto!important;max-width:46%;flex:0 0 auto;box-sizing:border-box}
+@media(max-width:480px){
+  .tool-hero{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+  .tool-hero-nav{gap:10px}
+  .tool-home-link{font-size:16px!important}
+  .tool-install[data-slot="button"]{width:auto!important;max-width:132px;min-width:0;padding:9px 12px!important}
+  .tool-install svg{width:20px!important;height:20px!important;flex:0 0 20px}
+  .tool-install span{display:inline!important}
+}
+@media(max-width:360px){
+  .tool-home-link{font-size:15px!important}
+  .tool-install[data-slot="button"]{max-width:118px;padding-inline:10px!important;font-size:15px!important}
+}
