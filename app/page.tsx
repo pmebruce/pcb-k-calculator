@@ -219,9 +219,10 @@ export default function Home() {
   const unitLabel = UNIT_LABEL[form.unit];
   return <>
     <a className="skip-link" href="#board-settings">前往輸入參數</a>
-    <header className="app-header">
-      <div className="brand"><img src={withBasePath("/icons/pcb-192-v4.png")} alt="PCB thermal conductivity calculator" width="54" height="54" /><div><h1>pcb-k計算</h1><p>THERMAL CALCULATOR</p></div></div>
-      <Button variant="outline" className="app-button install-button" aria-label={installed ? "查看安裝說明" : "安裝 pcb-k計算"} onClick={installApp}><Smartphone aria-hidden="true" /><span>{installed ? "安裝說明" : "安裝 App"}</span></Button>
+    <header className="tool-hero">
+      <div className="tool-hero-nav"><a className="tool-home-link" href="https://pmebruce.github.io/engineering-toolbox/">← 工程工具箱</a><Button variant="outline" className="app-button install-button tool-install" aria-label={installed ? "查看安裝說明" : "加入主畫面"} onClick={installApp}><Smartphone aria-hidden="true" /><span>{installed ? "已安裝" : "加入主畫面"}</span></Button></div>
+      <div className="tool-hero-main"><img className="tool-hero-logo" src={withBasePath("/icons/pcb-192-v4.png")} alt="PCB thermal conductivity calculator" width="68" height="68" /><div className="tool-hero-copy"><p className="tool-kicker">PCB / EFFECTIVE CONDUCTIVITY</p><h1>pcb-k 計算</h1></div></div>
+      <p className="tool-hero-description">依層疊、板厚與覆銅率，估算板面及厚度方向的等效導熱係數。</p>
     </header>
     <main className="page-shell">
       <div className="workspace-topline"><span className="workspace-label"><span className="status-dot" />多層板・各向異性估算</span><span className="save-state" role="status">{storageError ? "設定無法保存" : saved ? <><CheckCheck aria-hidden="true" />已保存於本機</> : "參數即時更新"}</span></div>
