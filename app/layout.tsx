@@ -3,7 +3,7 @@ import { APP_ICON_DATA_URL, APPLE_ICON_DATA_URL } from "@/lib/app-icons";
 import { withBasePath } from "@/lib/base-path";
 import "./globals.css";
 
-const title = "pcb-k計算";
+const title = "PCB-k 計算";
 const origin = (process.env.NEXT_PUBLIC_SITE_URL || "https://pcb-k-lab-yc.ycchiu15.chatgpt.site").replace(/\/$/, "");
 const description = "逐層設定 PCB 銅厚與覆銅率，計算板面與厚度方向等效導熱係數。手機大字介面，支援離線使用。";
 export const metadata: Metadata = {
