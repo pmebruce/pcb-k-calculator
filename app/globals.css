@@ -512,3 +512,9 @@ header.tool-hero h1{font-size:28px!important;line-height:1.25!important}
 header.tool-hero h1{font-size:25px!important}
 .tool-home-link,.tool-install{font-size:15px!important}
 }
+
+/* High-contrast hero text for the light PCB theme. */
+.tool-home-link{color:#315c4b!important}
+.tool-kicker{color:#9a5525!important}
+.tool-hero-description{color:#55665a!important}
+.tool-install span{display:inline!important}
